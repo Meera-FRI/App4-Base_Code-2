@@ -41,13 +41,13 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 		var yes_count = 0;
         var no_count = 0;
 
-		 // This function adds a point when their answer indicates a sign of allergies
+		 // This function adds a point when their answer indicates a sign of yes
         function yesAdd(){
             yes_count = yes_count + 1;
 		alert(yes_count);
         }
 	
- // This function adds a point when their answer indicates they have a cold 
+ // This function adds a point when their answer indicates they are fine 
         function noAdd(){
             no_count = no_count + 1;
         }
@@ -55,8 +55,8 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 		function calculateResults(){
    	
 	// Calculates the total counts into percentages
-		var yesPercent = (yes_count / 6) * 100;
-    	var noPercent = (no_count / 6) * 100;
+		var yesPercent = (yes_count / 5) * 100;
+    	var noPercent = (no_count / 5) * 100;
 
 	// Get the HTML element where results will be displayed
     	var resultElement = document.getElementById("results_display");
@@ -92,8 +92,8 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
 }
 
        	img, object{
-            	max-height:70%;
-        		max-width:70%;
+            	max-height:45%;
+        		max-width:45%;
         	}
 </style>
 
@@ -202,6 +202,7 @@ https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-
     <div id="content" class="w3-container">
 		<!-- This is where the user can see their results -->
         <p id="results_display"></p>
+		<img src=https://www.thewmhi.com/wp-content/uploads/2023/03/Easy-Mental-Health-Tips-cov.png>
     </div>
 </div>
 <footer class="w3-bottom w3-container w3-flat-carrot">

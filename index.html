@@ -7,30 +7,28 @@ THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.
  
 Authors in chronological order of contribution:
 Tim Riedel
-Maritza McNeal
+Meera Menon
  
 Further Information:
-http://diystream.cns.utexas.edu/
-
+http://cns.utexas.edu/fri
+ 
 Research Educator:
 Timothy Riedel
 triedel@utexas.edu
  
 Brief Description of Goal of Code:
-The goal of this code is to give the percent possibility that a rash is scabies or contact dermatitis after answering a series of questions.
+Make an app that might help someone figure out if they need to focus more on their well-being.  This app should flip through a series of questions and depending on the answers give a probability if they should or if they are fine.
+
  
 Known Issues:
-Results are currently not showing up when pressing button on last page
-Ignore this error message if you see it using the javaScript console: Error with Permissions-Policy header: Origin trial controlled feature not enabled: 'interest-cohort'.
+Diagnosing whether you need to take care of yourself more based on your symptoms.
 
-References:
 https://www.w3schools.com/w3css/default.asp
 https://stackoverflow.com/questions/8211128/multiple-distinct-pages-in-one-html-file
-https://mybestguide.com/health-and-care/skin-allergy/
 -->
 	
- <head> 
-      <title>Hello World</title>  
+   <head> 
+      <title>Mental Health Check</title>  
       <meta name="viewport" content="width=device-width, initial-scale=1">
       <meta name="apple-mobile-web-app-capable" content="yes">
       <link rel="stylesheet" href="w3.css">
@@ -39,33 +37,42 @@ https://mybestguide.com/health-and-care/skin-allergy/
 
 
 <script>
-        var contactdermatitis_count = 0; //contactdermatitis count to begin at 0
-        var scabies_count = 0; //scabies count to begin at 0
+         // These variables keep track of how many answers point to each condition
+		var yes_count = 0;
+        var no_count = 0;
 
-        function contactdermatitisAdd(){
-            contactdermatitis_count = contactdermatitis_count + 1; //if question relates to contact dermatitis, add 1
-		alert(contactdermatitis_count); //alerts that question relates to contact dermatitis 
-
+		 // This function adds a point when their answer indicates a sign of allergies
+        function yesAdd(){
+            yes_count = yes_count + 1;
+		alert(yes_count);
         }
 	
-	 function scabiesAdd(){
-            scabies_count = scabies_count + 1; //if question relates to scabies, add 1
-        
+ // This function adds a point when their answer indicates they have a cold 
+        function noAdd(){
+            no_count = no_count + 1;
         }
-	
-	function getResults(){
-		var contactdermatitisPercent = (contactdermatitis_count / 4) * 100; //equation to calculate the contact dermatitis percent by questions that answered "Yes" to contact dermatitis
-		var scabiesPercent = (scabies_count / 4) * 100; //equation to calculate the scabies percent by questions that answered "Yes" to scabies
-		document.getElementById("results").innerHTML = "Probability it is contact dermatitis =" + contactdermatitisPercent + "<br> Probability it is scabies = " + scabiesPercent; 	//function to calculate the percent possibility that it is either contact dermatitis or scabies
+	// This function calculates and displays the final results
+		function calculateResults(){
+   	
+	// Calculates the total counts into percentages
+		var yesPercent = (yes_count / 6) * 100;
+    	var noPercent = (no_count / 6) * 100;
 
+	// Get the HTML element where results will be displayed
+    	var resultElement = document.getElementById("results_display");
+	
+	// Inserts the results onto the page
+    resultElement.innerHTML =
+        "Probability it is a yes = " + yesPercent.toFixed(1) + "%<br>" +
+        "Probability you are doing good now = " + noPercent.toFixed(1) + "%";
 	}
-
   </script>
+
 
 
 <style>	
 .body {
-     margin: 0em; 
+     margin: 0em;
 }
 
 .page {
@@ -87,95 +94,110 @@ https://mybestguide.com/health-and-care/skin-allergy/
 
 <body>
 <div id="header" class="w3-container w3-flat-carrot">
-	<h1>DIY IS HERE!?</h1>  <! header on first page when visiting site >
+	<h1>Do I need to start prioritizing my well-being more?</h1>
 </div>
 	
 <div id="content" class="w3-container">
-	<p>Are you wondering if your rash could potentially be scabies? Answer a few short questions to find out!</p>  <! introduction paragraph >
+	<p>Are you feeling like you may need to prioritize your well-being more? Answer a few short questions to find out!</p>
 	
-	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>  <! code for button on first page, this brings you to series of questions >
+	<a href="#one" class="w3-btn w3-grey w3-round"> Get Started </a>
 	
-	</p> <img src="picture.webp" alt="picture of various rashes with identifying name" width="370" height="355"> </p>
-	
-	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>  <! Disclaimer that is displayed on first page >
+	<p>The following code has been developed by students and/or researchers of the Freshman Research Initiative DIY Diagnostics Stream at The University of Texas at 		Austin.  This code is shared for demonstration purposes and should not be considered a product -- it is for entertainment purposes only. Any user of this code 			does so at their own risk. Members of the DIY Stream, FRI, and The University of Texas system are not liable for anything related to this code.</p>
  	
-	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>  <! disclaimer displayed on first page >
-
-<div class="page" id="one">  <! this page includes code that asks the user the first question. Once user presses the "Yes" or "No" button, the user will be directed to page 2 >
+	<p>THIS CODE SHOULD NOT BE USED TO DIAGNOSE ANY KIND OF MEDICAL CONDITION.</p>
+</div> <!-- adding this because it seems to be missing????? -->
+	
+<div class="page" id="one"> <!-- This is page 1 -->
 	<div id="header" class="w3-container w3-flat-carrot">
-		<h1>Question 1</h1>
-	<!-- added code to make yes or no buttons for question 1, response goes into function for contact dermatits and scabies --> 
+		<h1>Question 1</h1> <!-- Question Number -->
 	</div>
 	
     	<div id="content" class="w3-container">
-	<p>Is your rash mainly itching at night?</p>   <! question 1 that is asked to user >
-	</div>
-	<a href="#two" onclick="scabiesAdd();"class="w3-btn w3-grey w3-round"> Yes </a>  <! if user responds yes, one will be added to scabies >
-	<a href="#two" onclick="contactdermatitisAdd();"class="w3-btn w3-grey w3-round"> No </a>  <! if user responds no, one will be added to contact dermatitis  >
-     
-		 <!-- added question into content section --> 
+			<!-- The question -->
+        <p>Do you often feel overwhelmed?.</p> 
+			<!-- If user clicks yes it will increase the yes score or increase no score if no and both will make it go to next page -->
+			<a href="#two"  onclick="yesAdd();" class="w3-btn w3-black"> Yes</a>
+         	<a href="#two"  onclick="noAdd();" class="w3-btn w3-black">No</a>
+
     	</div>
 </div>
 
-<div class="page" id="two">  <! page two includes information that asks user a question then takes their response and either adds to contact dermatitis or adds to scabies >
+<div class="page" id="two"> <!-- This is page 2 -->
 	<div class="w3-container w3-flat-carrot">
-		<h1>Question 2</h1>  <! header displayed on page 2 >
+		<h1>Question 2</h1>
 	</div>
-	<div id="content" class="w3-container">
-	 <!-- moved question to appear above buttons --> 
-	<p>Is your rash forming a line?</p>  <! second question that is asked to user >
-	<a href="#three" onclick="scabeisAdd();"class="w3-btn w3-grey w3-round"> Yes </a>  <! if user resonds yes, one will be added to scabies >
-	<a href="#three" onclick="contactdermatitisAdd();"class="w3-btn w3-grey w3-round"> No </a>  <! if user responds no, one will be added to contact dermatits  >
 	
-		
-		<!-- Added content into page two content section and put corresponding scabies and contact dermatitis signs-->
+	<div id="content" class="w3-container">
+		<p>Do you feel supported or loved?.</p>
+		<!-- If user clicks no it will increase yes score or increase no score if they press yes and both will make it go to next page -->
+		<a href="#three"  onclick="noAdd();" class="w3-btn w3-black"> Yes</a>
+         	<a href="#three"  onclick="yesAdd();" class="w3-btn w3-black">No</a>
+
+	</div>
+</div>	
+
+<div class="page" id="three"> <!-- This is page 3 -->
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 3</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Do you have goals in life?.</p>
+		<!-- If user clicks no it will increase allergy score or increase cold score if yes and both will make it go to next page -->
+			<a href="#four"  onclick="coldAdd();" class="w3-btn w3-black"> Yes</a>
+         	<a href="#four"  onclick="allergyAdd();" class="w3-btn w3-black">No</a>
+	</div>
+</div>	
+<div class="page" id="four"> <!-- This is page 4 -->
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 4</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Have you felt sad or depressed in the last two weeks?.</p>
+	<!-- If user clicks yes it will increase the yes score or increase no score if no and both will make it go to next page -->
+			<a href="#two"  onclick="yesAdd();" class="w3-btn w3-black"> Yes</a>
+         	<a href="#two"  onclick="noAdd();" class="w3-btn w3-black">No</a>
+</div>
+</div>	
+
+	<div class="page" id="five"> <!-- This is page 5 -->
+	<div class="w3-container w3-flat-carrot">
+		<h1>Question 5</h1>
+	</div>
+	
+	<div id="content" class="w3-container">
+		<p>Do you have trouble sleeping?.</p>
+		<!-- If user clicks yes it will increase the yes score or increase no score if no and both will make it go to next page -->
+			<a href="#two"  onclick="yesAdd();" class="w3-btn w3-black"> Yes</a>
+         	<a href="#two"  onclick="noAdd();" class="w3-btn w3-black">No</a>
 	</div>
 </div>	
 	
-<div class="page" id="three">  <! page 3 include the third question that the user is asked to help determine the probabilty of scabies or contact dermatits. once user clicks "yes" or "no", user will be redirected to page 3 >
-	<div id="header" class="w3-container w3-flat-carrot">
-		<h1>Question 3</h1>  <! header displayed on page 3 >
-	</div>
-	 <!-- moved question to appear above buttons --> 
-	<p>Is your rash blotchy?</p>     <! question asked on page 3 >
-	<a href="#four" onclick="contactdermatitisAdd();"class="w3-btn w3-grey w3-round"> Yes </a>  <! one will be added to contact dermatitis if user responds yes on question 3 >
-	<a href="#four" onclick="scabiesAdd();"class="w3-btn w3-grey w3-round"> No </a>  <! one will be added to scabies if user responds no on question 3 >
-    	<div id="content" class="w3-container">
+<div class="page" id="six"> <!-- Page before final results -->>
+    <div class="w3-container w3-flat-carrot">
+        <h1>Results</h1>
+    </div>
 
-		 <!-- added question into content section and added corresponfing allergy/cold responses --> 
-    	</div>
+    <div id="content" class="w3-container">
+        <p>Click below to view your results.</p>
+		<!-- When clicked it will calculate the results and move to page 7 -->
+		<a href="#seven" onclick="calculateResults();" class="w3-btn w3-grey w3-round">View Results</a>
+    </div>
 </div>
-	<div class="page" id="four">  <! this page includes content that askes user the 4th question to determine the probability of their rash being contact dermatitis or scabies, once user clicks "yes" or "no", they will be redirected to page 5 >
-	<div id="header" class="w3-container w3-flat-carrot">
-		<h1>Question 4</h1>  <! header on page four >
-	</div>
-        <!-- moved question to appear above buttons --> 
-	<p>Does your rash sting?</p>  <! 5th question displayed for user to answer >
-	<a href="#five" onclick="contactdermatitisAdd();"class="w3-btn w3-grey w3-round"> Yes </a>  <! if user responfd yes, one will be added to contact dermatitis >
-	<a href="#five" onclick="scabiesAdd();"class="w3-btn w3-grey w3-round"> No </a>  <! if user responds no, one will be added to scabies >
-    	<div id="content" class="w3-container">
-           
-		 <!-- changed question number and page ID; added question into content section and added corresponing contact dermatitis/scabies responses --> 
-		</div>
+	
+<div class="page" id="seven"> <!-- Final results page -->
+    <div id="header" class="w3-container w3-flat-carrot">
+        <h1>Result</h1>
+    </div>
+
+    <div id="content" class="w3-container">
+		<!-- This is where the user can see their results -->
+        <p id="results_display"></p>
+    </div>
 </div>
-		</div>
-	<div class="page" id="five">  <! page five displays the results of the previous questions answered by the user >
-	<div id="header" class="w3-container w3-flat-carrot">
-		<h1>Results</h1>  <! this is the header displayed on page 5 >
-
-	</div> 
-	<div id="content" class="w3-container">	
-		<p id="results"></p>
-    	</div>
-		<button onclick="getResults()">Results</button>  <! button that once pressed will display probability that symptoms are either contact dermatitis or scabies from previously answered questions >
-		
-	</div>
-
-		
 <footer class="w3-bottom w3-container w3-flat-carrot">
-	<p>DIY!</p>  <! this is what is displayed on the footer >
+	<p>DIY!</p>
 </footer>
-
 </body>
 </html>
-
